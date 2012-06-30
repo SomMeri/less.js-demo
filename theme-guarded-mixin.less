@@ -1,0 +1,15 @@
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+  -webkit-box-shadow: @style @c;
+  -moz-box-shadow:    @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+ 
+.box {
+  .box-shadow(0 0 7px, rgba(0, 90, 0, 0.9));
+  div {
+    .box-shadow(0 0 7px, 30%);
+  }
+}

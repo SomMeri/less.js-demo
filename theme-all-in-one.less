@@ -1,0 +1,58 @@
+/* define global variables */
+@base: #38abf9;
+
+/* Parametrized mixin: 
+     class with properties to be reused in other classes
+     it will be used only if the second parameter is color
+*/
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+  -webkit-box-shadow: @style @c;
+  -moz-box-shadow:    @style @c;
+}
+
+/* Parametrized mixin: 
+     class with properties to be reused in other classes 
+     it will be used only if the second parameter is number
+     the second parameter is optional - its default value is 50%
+*/
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  /* Convert the number parameter into color value and 
+     reuse previous mixin.
+  */
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+/* Define the class .box. */
+.box { 
+  /* css as usually, nothing to see here */
+  display:inline-block; 
+  border: 2px solid;
+
+  /* Define local variable. It is available only:
+       inside the box class
+       inside nested elements of the box class
+  */
+  @defPad: 4px;
+
+  /* use the @defPad variable */
+  padding: @defPad;
+
+  /* calculate colors from the value of the global @base variable */
+  border-color: lighten(@base, 30%);
+  color: saturate(@base, 5%);
+
+  /* Nesting: almost the same as selector ".box div", except 
+     that local variables are available inside the nested class
+   */
+  div { 
+    /* use the @defPad variable from the outer class */
+    padding-left: @defPad;
+    padding-right: @defPad;
+
+    /* use the box-shadow mixin, all its properties are 
+       going to be placed here */
+    .box-shadow(0 0 5px, 30%);
+ }
+} 
+

@@ -1,0 +1,17 @@
+/* unused global variable */
+@base: #38abf9;
+ 
+.box {
+  /* local variable */
+  @defPad: 4px;
+  display:inline-block;
+  padding: @defPad;
+  div {
+    /* div inside box properties */
+    padding-left: @defPad;
+    padding-right: @defPad;
+  }
+}
+ 
+/* @defPad is NOT available here */
+

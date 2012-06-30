@@ -1,0 +1,13 @@
+.box-shadow(@style, @color: rgb(0, 0, 0)) {
+  box-shadow:         @style @color;
+  -webkit-box-shadow: @style @color;
+  -moz-box-shadow:    @style @color;
+}
+ 
+.box {
+  .box-shadow(0 0 7px, rgba(0, 90, 0, 0.9));
+  div {
+    .box-shadow(0 0 7px, rgba(90, 0, 0, 0.9));
+  }
+}
+
